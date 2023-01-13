@@ -1,0 +1,19 @@
+---
+
+consul_datacenter: "local"
+consul_data_dir: "/opt/consul"
+
+consul_server: false
+consul_ui_config:
+  enabled: false 
+
+consul_client_addr: "0.0.0.0"
+consul_bind_addr: "0.0.0.0"
+consul_advertise_addr: "{{ ansible_host }}"
+
+consul_encrypt: "qcc17FihcrB/YKG+MWR3PZ3Hl1h4QEndGaDqYODbnvY="
+
+consul_ca_file: "consul-agent-ca.pem"
+
+consul_auto_encrypt:
+  tls: true

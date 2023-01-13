@@ -1,0 +1,13 @@
+consul_acl:
+  enabled: true
+  default_policy: "deny"
+  enable_token_persistence: true
+  tokens:
+    agent: 605aaa6f-1c86-f5b8-217b-b87458257c0e
+    default: 605aaa6f-1c86-f5b8-217b-b87458257c0e
+
+nomad_consul_token: 605aaa6f-1c86-f5b8-217b-b87458257c0e
+
+nomad_vault_enabled: true
+nomad_vault_address: "https://192.168.122.70:8200"
+nomad_vault_tls_skip_verify: true

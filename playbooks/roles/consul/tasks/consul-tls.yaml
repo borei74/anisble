@@ -1,0 +1,34 @@
+---
+- name: deploy consul certificates and key files
+  block:
+    - name: deploy consul CA
+      copy:
+        src: consul-agent-ca.pem
+        dest: "{{consul_config_dir}}/{{consul_ca_file}}"
+        mode: 0644
+        owner: "{{ consul_user }}"
+        group: "{{ consul_group }}"
+      when: true
+
+    - name: deploy agent certificate
+      copy:
+        src: "{{ansible_hostname}}-cert.pem"
+        dest: "{{consul_config_dir}}/{{consul_cert_file}}"
+        mode: 0644
+        owner: "{{ consul_user }}"
+        group: "{{ consul_group }}"
+      when: consul_server == true
+
+    - name: deploy agent certificate
+      copy:
+        src: "{{ansible_hostname}}-key.pem"
+        dest: "{{consul_config_dir}}/{{consul_key_file}}"
+        mode: 0600
+        owner: "{{ consul_user }}"
+        group: "{{ consul_group }}"
+      when: consul_server == true
+
+  notify:
+    - restart consul service  
+  tags:
+    - consul-tls

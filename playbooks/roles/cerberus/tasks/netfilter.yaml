@@ -1,0 +1,7 @@
+---
+
+- name: ensure that iptables-persistent package is installed
+  apt:
+    name: iptables-persistent
+    state: present
+  become: yes

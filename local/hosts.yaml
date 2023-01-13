@@ -1,0 +1,60 @@
+all:
+  children:
+    ceph_servers:
+      children:
+        ceph_mon:
+          hosts:
+            ceph-mon00:
+              ansible_host: 192.168.122.19
+        ceph_osd:
+          hosts:
+            ceph-osd-node00:
+              ansible_host: 192.168.122.10
+            ceph-osd-node01:
+              ansible_host: 192.168.122.11
+    nomad_agents:
+      children:
+        nomad_servers:
+          hosts:
+            nomad-srv00:
+              ansible_host: 192.168.122.40
+            nomad-srv01:
+              ansible_host: 192.168.122.41
+            nomad-srv02:
+              ansible_host: 192.168.122.42
+        nomad_clients:
+          hosts:
+            nomad-client00:
+              ansible_host: 192.168.122.50
+            nomad-client01:
+              ansible_host: 192.168.122.51
+            nomad-client02:
+              ansible_host: 192.168.122.52
+            nomad-client03:
+              ansible_host: 192.168.122.53
+    actions_runners:
+      hosts:
+        actions-runner00:
+          ansible_host: 192.168.122.60
+    vault_servers:
+      hosts:
+        vault-srv00:
+          ansible_host: 192.168.122.70
+        vault-srv01:
+          ansible_host: 192.168.122.71
+    consul_agents:
+      children:
+        consul_servers:
+          hosts:
+            consul-srv00:
+              ansible_host: 192.168.122.30
+            consul-srv01:
+              ansible_host: 192.168.122.31
+            consul-srv02:
+              ansible_host: 192.168.122.32
+        consul_clients:
+          children:
+            vault_servers:
+            nomad_agents:
+            ceph_servers:
+            actions_runners:

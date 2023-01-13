@@ -1,0 +1,7 @@
+---
+- name: github self-hosted actions runners
+  hosts: actions_runners
+
+  roles:
+    - actions-runner
+  

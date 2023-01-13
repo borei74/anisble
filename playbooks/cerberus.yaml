@@ -1,0 +1,6 @@
+---
+- name: Cerberus - generic system hardener
+  hosts: all
+  become: true
+  roles:
+    - role: cerberus

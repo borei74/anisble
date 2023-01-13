@@ -1,0 +1,18 @@
+---
+- name: download github actions-runner tarball
+  get_url:
+    url: "{{actions_runner['url']}}/{{actions_runner['tag']}}/{{actions_runner['package']}}"
+    dest: "{{actions_runner['home']}}"
+  become: yes
+
+- name: deploy github actions-runner
+  command:
+    chdir: "{{actions_runner['home']}}"
+    cmd: "tar xzf {{actions_runner['package']}}"
+  become: yes
+
+- name: update actions-runner owner
+  command:
+    chdir: "{{actions_runner['home']}}"
+    cmd: "chown -R {{actions_runner['user']}}:{{actions_runner['group']}} ."
+  become: yes

@@ -1,0 +1,21 @@
+---
+# defaults file for github actions-runner
+#
+actions_runner:
+  config:
+    url: 'https://github.com/SoleksDataGroup'
+    auth_token: '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'
+    org: 'SoleksDataGroup'
+    work: '/var/lib/actions-runner'
+    name: "{{inventory_hostname}}"
+    labels:
+      - 'self-hosted'
+      - 'Linux'
+  user: 'actions'
+  group: 'actions'
+  home: '/opt/actions-runner'
+  tag: 'v2.299.1'
+  package: 'actions-runner-linux-x64-2.299.1.tar.gz'
+  hash: '147c14700c6cb997421b9a239c012197f11ea9854cd901ee88ead6fe73a72c74'
+  url: 'https://github.com/actions/runner/releases/download'
+  

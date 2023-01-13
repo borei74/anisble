@@ -1,0 +1,18 @@
+---
+
+consul_config_dir: "/tmp"
+
+consul_server: true
+
+consul_client_addr: "0.0.0.0"
+consul_bind_addr: "0.0.0.0"
+consul_advertise_addr: "{{ ansible_host }}"
+
+consul_bootstrap_expect: 3
+
+consul_encrypt: "qcc17FihcrB/YKG+MWR3PZ3Hl1h4QEndGaDqYODbnvY="
+
+consul_ca_file: "consul-agent-ca.pem"
+consul_cert_file: "{{ansible_hostname}}-cert.pem"
+consul_key_file: "{{ansible_hostname}}-key.pem"
+

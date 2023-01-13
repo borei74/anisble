@@ -1,0 +1,10 @@
+---
+- name: Test SSH connection to the hosts
+  hosts: all
+
+  tasks:
+
+  - name: Execute hostaname command
+    command: /usr/bin/hostname
+    become: yes
+    

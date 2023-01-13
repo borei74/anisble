@@ -1,0 +1,13 @@
+---
+
+- name: template nomad main confuguration file
+  template:
+    src: nomad.hcl.j2
+    dest: "{{nomad_config_dir}}/{{nomad_config_file}}"
+    owner: "{{nomad_user}}"
+    group: "{{nomad_group}}"
+    mode: "0644"
+  notify:
+    - restart nomad service
+  tags:
+    - nomad-config

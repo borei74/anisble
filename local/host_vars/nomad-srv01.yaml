@@ -1,0 +1,15 @@
+consul_acl:
+  enabled: true
+  default_policy: "deny"
+  enable_token_persistence: true
+  tokens:
+    agent: c7eb84f4-b99b-aa24-64ee-73deba87aca8
+    default: c7eb84f4-b99b-aa24-64ee-73deba87aca8
+
+nomad_consul_token: c7eb84f4-b99b-aa24-64ee-73deba87aca8
+
+nomad_vault_enabled: true
+nomad_vault_address: "https://192.168.122.70:8200"
+nomad_vault_token: "hvs.CAESIPvY7mU7ZwIiAA6I8hWaryZm1f3abtrp8TVvmZe2RM9vGh4KHGh2cy5jS2hFbUJ0RWpjcGdlNDJHWlhMZWRWWWQ"
+nomad_vault_create_from_role: "nomad-cluster"
+nomad_vault_tls_skip_verify: true

@@ -1,0 +1,39 @@
+---
+- name: create actions-runner work directory
+  file:
+    path: "{{actions_runner['config']['work']}}"
+    state: 'directory'
+    owner: "{{actions_runner['user']}}"
+    group: "{{actions_runner['group']}}"
+  become: true
+
+- name: get actions-runner registration token
+  uri:
+    url: "https://api.github.com/orgs/{{actions_runner['config']['org']}}/actions/runners/registration-token"    
+    method: 'POST'
+    status_code: 201
+    headers:
+      Accept: "application/vnd.github+json"
+      Authorization: "Bearer {{actions_runner['config']['auth_token']}}"
+  register: reply
+
+- name: actions-runner registration token
+  debug:
+    var: reply['json']
+    
+- name: configure github actions-runner
+  command:
+    chdir: "{{actions_runner['home']}}"
+    cmd: "./config.sh --unattended --replace --url {{actions_runner['config']['url']}} --token {{reply['json']['token']}} --name {{actions_runner['config']['name']}} --labels {{actions_runner['config']['labels']|join(',')}} --work {{actions_runner['config']['work']}}"
+  become: true
+  become_user: "{{actions_runner['user']}}"
+
+- name: create actions-runner systemd service
+  command:
+    chdir: "{{actions_runner['home']}}"
+    cmd: "./svc.sh install {{actions_runner['user']}}"
+  become: true
+
+- name: start actions-runner service
+  systemd:
+    name: "actions.runner.{{actions_runner['config']['org']}}.{{actions_runner['config']['name']}}"

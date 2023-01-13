@@ -1,0 +1,23 @@
+---
+- name: create actions-runner group
+  group:
+    name: "{{actions_runner['group']}}"
+    state: 'present'
+  become: yes
+
+- name: create actions-runner user
+  user:
+    name: "{{actions_runner['user']}}"
+    group: "{{actions_runner['group']}}"
+    home: "{{actions_runner['home']}}"
+    create_home: true
+  become: yes
+
+- name: add actions-runner user to sudoers
+  copy:
+    dest: "/etc/sudoers.d/80-{{actions_runner['user']}}-user"
+    content: |
+      # Created by ansible
+      #
+      {{actions_runner['user']}} ALL=(ALL) NOPASSWD:ALL
+  become: yes

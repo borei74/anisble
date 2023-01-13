@@ -1,0 +1,7 @@
+consul_acl:
+  enabled: true
+  default_policy: "deny"
+  enable_token_persistence: true
+  tokens:
+    agent: fe9bf68a-ef37-7981-7a7b-64f2fbf9f48d
+    default: fe9bf68a-ef37-7981-7a7b-64f2fbf9f48d

@@ -1,0 +1,6 @@
+---
+# tasks file for github actions-runner
+#
+- import_tasks: create-actions-runner-user.yaml
+- import_tasks: install-actions-runner.yaml
+- import_tasks: register-actions-runner.yaml

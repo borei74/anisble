@@ -1,0 +1,36 @@
+---
+- name: Add ansible user.
+  hosts: all
+  remote_user: 'ubuntu'
+
+  tasks:
+    - name: Add ansible group
+      group:
+        name: ansible
+        gid: 1022
+      become: yes
+    
+    - name: Add ansible user
+      user:
+        name: ansible
+        uid: 1022
+        group: ansible
+        home: /home/ansible
+      become: yes
+
+    - name: Deploy ansible SSH key
+      authorized_key:
+        user: ansible
+        key: "{{ lookup('hashi_vault', 'kv/data/soleks/infra/ansible/ssh:public_key validate_certs=no')}}" 
+        state: present
+        path: '.ssh/test'
+      become: yes
+
+    - name: Add ansible group to sudoers 
+      copy:
+        dest: /etc/sudoers.d/80-ansible-user
+        content: |
+          # Created by ansible
+          #
+          ansible ALL=(ALL) NOPASSWD:ALL
+      become: yes

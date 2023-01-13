@@ -1,0 +1,9 @@
+---
+# tasks file for cerberus
+#
+- include_tasks: ssh-access.yaml
+  tags:
+    - ssh
+- include_tasks: netfilter.yaml
+  tags:
+    - netfilter
